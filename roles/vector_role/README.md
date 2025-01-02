@@ -1,38 +1,57 @@
-Role Name
-=========
+```markdown
+# Ansible Vector Role
 
-A brief description of the role goes here.
+## Описание
 
-Requirements
-------------
+Эта роль Ansible предназначена для установки и настройки [Vector](https://vector.dev/) — высокопроизводительного инструмента для обработки и передачи данных. Vector позволяет собирать, обрабатывать и отправлять данные в реальном времени, что делает его идеальным решением для работы с логами и метриками.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Установка
 
-Role Variables
---------------
+Для установки этой роли используйте `ansible-galaxy`:
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```bash
+ansible-galaxy install killakazzak.vector_role
+```
 
-Dependencies
-------------
+## Параметры
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Роль `vector_role` поддерживает следующие параметры:
 
-Example Playbook
-----------------
+| Параметр                     | Тип    | По умолчанию         | Описание                                                                 |
+|------------------------------|--------|----------------------|--------------------------------------------------------------------------|
+| `vector_version`             | строка | `"0.15.0"`           | Версия Vector, которую необходимо установить.                           |
+| `vector_config`              | строка | `"/etc/vector/vector.toml"` | Путь к файлу конфигурации Vector.                                      |
+| `vector_service_name`        | строка | `"vector"`           | Имя службы Vector для управления через systemd.                         |
+| `vector_install_dir`         | строка | `"/usr/local/bin"`   | Директория, в которую будет установлен Vector.                         |
+| `vector_user`                | строка | `"vector"`           | Пользователь, от имени которого будет запущен Vector.                  |
+| `vector_group`               | строка | `"vector"`           | Группа, к которой будет принадлежать пользователь Vector.               |
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+## Пример использования
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+Вот пример плейбука, который демонстрирует, как использовать роль `vector_role`:
 
-License
--------
+```yaml
+- hosts: all
+  roles:
+    - role: killakazzak.vector_role
+      vector_version: "0.15.0"
+      vector_config: "/etc/vector/vector.toml"
+      vector_service_name: "vector"
+```
 
-BSD
+## Зависимости
 
-Author Information
-------------------
+Эта роль не имеет зависимостей от других ролей.
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+## Лицензия
+
+Эта роль лицензирована под MIT License. Пожалуйста, смотрите файл LICENSE для получения дополнительной информации.
+
+## Контрибьюция
+
+Если вы хотите внести свой вклад в развитие этой роли, пожалуйста, создайте форк репозитория и отправьте пулл-реквест с вашими изменениями. Мы приветствуем любые улучшения и исправления ошибок!
+
+## Поддержка
+
+Если у вас есть вопросы или проблемы с этой ролью, пожалуйста, создайте issue в репозитории GitHub. Мы постараемся ответить как можно скорее.
+```
