@@ -1,2 +1,40 @@
 ---
-# tasks file for vector-role
+- name: Install and configure Vector
+  hosts: clickhouse
+  become: true
+
+  tasks:
+    - name: Get the latest version of Vector
+      # Uncomment the following lines to fetch the latest version dynamically
+      # ansible.builtin.uri:
+      #   url: "https://api.github.com/repos/vectordotdev/vector/releases/latest"
+      #   return_content: true
+      # register: vector_release
+
+    - name: Set vector_version variable
+      ansible.builtin.set_fact:
+        # v_version: "{{ vector_release.json.tag_name | replace('v', '') }}"
+        v_version: "{{ vector_version }}"
+
+    - name: Download Vector distribution
+      ansible.builtin.get_url:
+        url: "https://github.com/vectordotdev/vector/releases/download/v{{ v_version }}/vector-{{ v_version }}-{{ vector_arch }}-unknown-linux-gnu.tar.gz"
+        dest: "/tmp/vector-{{ v_version }}-{{ vector_arch }}.tar.gz"
+        mode: "0644"
+
+    - name: Create directory for Vector installation
+      ansible.builtin.file:
+        path: "{{ vector_install_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Extract Vector distribution
+      ansible.builtin.unarchive:
+        src: "/tmp/vector-{{ v_version }}-{{ vector_arch }}.tar.gz"
+        dest: "{{ vector_install_dir }}"
+        remote_src: true
+
+    - name: Check contents of Vector installation directory
+      ansible.builtin.command: ls -l {{ vector_install_dir }}
+      register: vector_dir_contents
+      changed_when: false
