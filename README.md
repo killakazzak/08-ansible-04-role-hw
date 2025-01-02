@@ -26,7 +26,14 @@
        name: clickhouse 
    ```
 
+Файл создан requirements.yml
+
 2. При помощи `ansible-galaxy` скачайте себе эту роль.
+
+```bash
+ansible-galaxy install -r requirements.yml -p roles
+```
+
 3. Создайте новый каталог с ролью при помощи `ansible-galaxy role init vector-role`.
 4. На основе tasks из старого playbook заполните новую role. Разнесите переменные между `vars` и `default`. 
 5. Перенести нужные шаблоны конфигов в `templates`.
