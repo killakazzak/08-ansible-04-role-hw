@@ -1,2 +1,6 @@
 ---
-# vars file for vector-role
+# Variables specific to the Vector role
+vector_version: "0.43.1"  # Set the desired version of Vector
+vector_arch: "x86_64"
+
+
