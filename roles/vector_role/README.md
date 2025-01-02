@@ -33,7 +33,7 @@ ansible-galaxy install killakazzak.vector_role
 - hosts: all
   roles:
     - role: killakazzak.vector_role
-      vector_version: "0.15.0"
+      vector_version: "0.43.1"
       vector_config: "/etc/vector/vector.toml"
       vector_service_name: "vector"
 ```
