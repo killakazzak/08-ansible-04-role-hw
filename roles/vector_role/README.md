@@ -1,4 +1,3 @@
-```markdown
 # Ansible Vector Role
 
 ## Описание
@@ -54,4 +53,3 @@ ansible-galaxy install killakazzak.vector_role
 ## Поддержка
 
 Если у вас есть вопросы или проблемы с этой ролью, пожалуйста, создайте issue в репозитории GitHub. Мы постараемся ответить как можно скорее.
-```
