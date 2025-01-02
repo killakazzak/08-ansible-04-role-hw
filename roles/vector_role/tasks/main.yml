@@ -14,7 +14,7 @@
     - name: Установить переменную vector_version
       ansible.builtin.set_fact:
         # v_version: "{{ vector_release.json.tag_name | replace('v', '') }}"
-        v_version: "{{ vector_version }}"
+        v_version: "{{ vector_role_version }}"
 
     - name: Скачать дистрибутив Vector
       ansible.builtin.get_url:
