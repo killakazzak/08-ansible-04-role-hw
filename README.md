@@ -33,6 +33,7 @@
 ```bash
 ansible-galaxy install -r requirements.yml -p roles
 ```
+![image](https://github.com/user-attachments/assets/dea4e9cc-f851-4c37-833c-cc089bdc4460)
 
 3. Создайте новый каталог с ролью при помощи `ansible-galaxy role init vector-role`.
 4. На основе tasks из старого playbook заполните новую role. Разнесите переменные между `vars` и `default`. 
