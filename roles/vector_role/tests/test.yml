@@ -1,0 +1,6 @@
+---
+- name: Установить и настроить Vector
+  hosts: localhost
+  remote_user: root
+  roles:
+    - vector_role

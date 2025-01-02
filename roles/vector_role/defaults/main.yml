@@ -1,0 +1,4 @@
+---
+# Default variables for the Vector role
+vector_role_install_dir: "/opt/vector"
+vector_role_config_template: "vector_config.j2"
