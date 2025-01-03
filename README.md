@@ -145,6 +145,7 @@ https://github.com/killakazzak/08-ansible-04-role-hw/blob/master/playbook.yml
 Роли загрузил на ansible-galaxy
 
 https://galaxy.ansible.com/ui/standalone/roles/killakazzak/vector_role/
+
 https://galaxy.ansible.com/ui/standalone/roles/killakazzak/lighthouse/
 
 ![image](https://github.com/user-attachments/assets/18e3b35e-c70d-4982-8bfb-96c99bf0061e)
