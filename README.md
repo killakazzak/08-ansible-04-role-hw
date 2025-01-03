@@ -115,7 +115,7 @@ roles/vector_role/tasks/main.yml
 
 6. Опишите в `README.md` обе роли и их параметры. Пример качественной документации ansible role [по ссылке](https://github.com/cloudalchemy/ansible-prometheus).
 
-
+В файл README.md добавлено описание роли https://github.com/killakazzak/08-ansible-04-role-hw/blob/master/roles/vector_role/README.md
 
 7. Повторите шаги 3–6 для LightHouse. Помните, что одна роль должна настраивать один продукт.
 8. Выложите все roles в репозитории. Проставьте теги, используя семантическую нумерацию. Добавьте roles в `requirements.yml` в playbook.
