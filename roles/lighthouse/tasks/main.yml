@@ -1,16 +1,31 @@
 ---
 - name: Установить и настроить Lighthouse
   block:
-    - name: Установить зависимости
+    - name: Установить зависимости для dnf
       ansible.builtin.dnf:
         name:
           - nodejs
           - npm
         state: present
+      when: ansible_facts.pkg_mgr == 'dnf'
+
+    - name: Установить зависимости для apt
+      ansible.builtin.apt:
+        name:
+          - nodejs
+          - npm
+        state: present
+      when: ansible_facts.pkg_mgr == 'apt'
 
     - name: Установить переменную lighthouse_version
       ansible.builtin.set_fact:
         v_version: "{{ lighthouse_version }}"
+
+    - name: Создать директорию для установки Lighthouse
+      ansible.builtin.file:
+        path: "{{ lighthouse_install_dir }}"
+        state: directory
+        mode: "0755"
 
     - name: Установить Lighthouse глобально
       ansible.builtin.shell: |
@@ -18,15 +33,9 @@
       args:
         warn: false
       register: npm_install_result
-      changed_when: npm_install_result.rc != 0 # Adjust based on your needs
+      changed_when: npm_install_result.rc != 0
       environment:
-        NODE_ENV: "production" # Example environment variable, adjust as needed
-
-    - name: Создать директорию для установки Lighthouse
-      ansible.builtin.file:
-        path: "{{ lighthouse_install_dir }}"
-        state: directory
-        mode: "0755"
+        NODE_ENV: "production"
 
     - name: Проверить установку Lighthouse
       ansible.builtin.command: lighthouse --version
@@ -42,4 +51,4 @@
     - name: Запустить Lighthouse с конфигурацией
       ansible.builtin.command: lighthouse --config={{ lighthouse_install_dir }}/lighthouse-config.json
       register: lighthouse_run
-      changed_when: lighthouse_run.rc != 0 # Change this based on your needs
+      changed_when: lighthouse_run.rc != 0
