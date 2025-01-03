@@ -139,7 +139,9 @@ https://github.com/killakazzak/08-ansible-04-role-hw/blob/master/playbook.yml
 12. В ответе дайте ссылки на оба репозитория с roles и одну ссылку на репозиторий с playbook.
 
 https://github.com/killakazzak/vector_role.git
+
 https://github.com/killakazzak/lighthouse.git
+
 https://github.com/killakazzak/08-ansible-04-role-hw/blob/master/playbook.yml
 
 Роли загрузил на ansible-galaxy
