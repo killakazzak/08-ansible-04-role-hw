@@ -109,9 +109,14 @@ roles/vector_role/tasks/main.yml
         mode: "0644"
 ```
 
-
 5. Перенести нужные шаблоны конфигов в `templates`.
+
+Файл перенесен в roles/vector_role/templates/vector_config.j2
+
 6. Опишите в `README.md` обе роли и их параметры. Пример качественной документации ansible role [по ссылке](https://github.com/cloudalchemy/ansible-prometheus).
+
+
+
 7. Повторите шаги 3–6 для LightHouse. Помните, что одна роль должна настраивать один продукт.
 8. Выложите все roles в репозитории. Проставьте теги, используя семантическую нумерацию. Добавьте roles в `requirements.yml` в playbook.
 9. Переработайте playbook на использование roles. Не забудьте про зависимости LightHouse и возможности совмещения `roles` с `tasks`.
