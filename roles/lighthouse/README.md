@@ -1,38 +1,60 @@
-Role Name
-=========
+# Ansible Role: Установка и настройка Lighthouse
 
-A brief description of the role goes here.
+## Описание
 
-Requirements
-------------
+Эта роль Ansible предназначена для установки и настройки [Lighthouse](https://developers.google.com/web/tools/lighthouse) — инструмента для анализа производительности веб-страниц. Роль поддерживает установку зависимостей через `dnf` и `apt`, а также настройку конфигурации Lighthouse.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Требования
 
-Role Variables
---------------
+- Ansible 2.9 или выше
+- Доступ к интернету для установки пакетов
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+## Установка
 
-Dependencies
-------------
+```bash
+$ ansible-galaxy install killakazzak.lighthouse
+```
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+## Использование
 
-Example Playbook
-----------------
+### Пример плейбука
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```yaml
+- hosts: all
+  become: yes
+  vars:
+    lighthouse_version: "12.3.0"  # Укажите нужную версию Lighthouse
+    lighthouse_install_dir: "/usr/local/bin/lighthouse"  # Укажите директорию установки
+    lighthouse_config_template: "path/to/lighthouse-config.json.j2"  # Укажите путь к шаблону конфигурации
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+  roles:
+    - yourusername.lighthouse
+```
 
-License
--------
+### Переменные
 
-BSD
+| Переменная                     | Описание                                      | По умолчанию |
+|--------------------------------|-----------------------------------------------|--------------|
+| `lighthouse_version`           | Версия Lighthouse для установки               | `latest`     |
+| `lighthouse_install_dir`       | Директория для установки Lighthouse           | `/usr/local/bin/lighthouse` |
+| `lighthouse_config_template`   | Путь к шаблону конфигурации Lighthouse       | `lighthouse-config.json.j2` |
 
-Author Information
-------------------
+## Задачи
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+- Установка зависимостей (Node.js и npm) в зависимости от менеджера пакетов (`dnf` или `apt`).
+- Установка Lighthouse глобально через npm.
+- Проверка установленной версии Lighthouse.
+- Копирование файла конфигурации Lighthouse из шаблона.
+- Запуск Lighthouse с указанной конфигурацией.
+
+## Лицензия
+
+Этот проект лицензирован под [MIT License](LICENSE).
+
+## Контрибьюция
+
+Если вы хотите внести свой вклад в проект, пожалуйста, создайте форк репозитория и отправьте пулл-реквест с вашими изменениями.
+
+## Поддержка
+
+Если у вас есть вопросы или проблемы, пожалуйста, откройте issue в репозитории.
