@@ -1,2 +1,2 @@
 ---
-# defaults file for lighthouse
+lighthouse_version: "10.0.0"
