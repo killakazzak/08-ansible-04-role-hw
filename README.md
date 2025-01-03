@@ -118,10 +118,36 @@ roles/vector_role/tasks/main.yml
 В файл README.md добавлено описание роли https://github.com/killakazzak/08-ansible-04-role-hw/blob/master/roles/vector_role/README.md
 
 7. Повторите шаги 3–6 для LightHouse. Помните, что одна роль должна настраивать один продукт.
+
+Роль для установки Ligthhouse - создана
+
+https://github.com/killakazzak/lighthouse
+
 8. Выложите все roles в репозитории. Проставьте теги, используя семантическую нумерацию. Добавьте roles в `requirements.yml` в playbook.
-9. Переработайте playbook на использование roles. Не забудьте про зависимости LightHouse и возможности совмещения `roles` с `tasks`.
-10. Выложите playbook в репозиторий.
-11. В ответе дайте ссылки на оба репозитория с roles и одну ссылку на репозиторий с playbook.
+
+Все роли загружены в репозитории. Тэги проставлены.
+
+https://github.com/killakazzak/vector_role.git
+https://github.com/killakazzak/lighthouse.git
+
+10. Переработайте playbook на использование roles. Не забудьте про зависимости LightHouse и возможности совмещения `roles` с `tasks`.
+11. Выложите playbook в репозиторий.
+
+Ansible-playbook загружен
+https://github.com/killakazzak/08-ansible-04-role-hw/blob/master/playbook.yml
+
+12. В ответе дайте ссылки на оба репозитория с roles и одну ссылку на репозиторий с playbook.
+
+https://github.com/killakazzak/vector_role.git
+https://github.com/killakazzak/lighthouse.git
+https://github.com/killakazzak/08-ansible-04-role-hw/blob/master/playbook.yml
+
+Роли загрузил на ansible-galaxy
+
+https://galaxy.ansible.com/ui/standalone/roles/killakazzak/vector_role/
+https://galaxy.ansible.com/ui/standalone/roles/killakazzak/lighthouse/
+
+![image](https://github.com/user-attachments/assets/18e3b35e-c70d-4982-8bfb-96c99bf0061e)
 
 ---
 
