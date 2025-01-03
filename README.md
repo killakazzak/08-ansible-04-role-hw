@@ -43,6 +43,23 @@ ansible-galaxy role init --init-path ./roles/ vector-role
 ![image](https://github.com/user-attachments/assets/aac4c4dd-43fd-467f-b82a-5f47589dcf04)
  
 4. На основе tasks из старого playbook заполните новую role. Разнесите переменные между `vars` и `default`. 
+
+roles/vector_role/vars/main.yml
+
+```yml
+---
+# Variables specific to the Vector role
+vector_role_version: "0.43.1" # Set the desired version of Vector
+vector_role_arch: "x86_64"
+```
+roles/vector_role/defaults/main.yml
+```yml
+---
+# Default variables for the Vector role
+vector_role_install_dir: "/opt/vector"
+vector_role_config_template: "vector_config.j2"
+```
+
 5. Перенести нужные шаблоны конфигов в `templates`.
 6. Опишите в `README.md` обе роли и их параметры. Пример качественной документации ansible role [по ссылке](https://github.com/cloudalchemy/ansible-prometheus).
 7. Повторите шаги 3–6 для LightHouse. Помните, что одна роль должна настраивать один продукт.
