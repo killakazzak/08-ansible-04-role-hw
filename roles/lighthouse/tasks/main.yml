@@ -1,2 +1,40 @@
 ---
-# tasks file for lighthouse
+- name: Установить и настроить Lighthouse
+  block:
+    - name: Установить зависимости
+      ansible.builtin.yum:
+        name:
+          - nodejs
+          - npm
+        state: present
+
+    - name: Установить переменную lighthouse_version
+      ansible.builtin.set_fact:
+        v_version: "{{ lighthouse_version }}"
+
+    - name: Установить Lighthouse глобально
+      ansible.builtin.command: npm install -g lighthouse@{{ v_version }}
+      args:
+        warn: false
+
+    - name: Создать директорию для установки Lighthouse
+      ansible.builtin.file:
+        path: "{{ lighthouse_install_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Проверить установку Lighthouse
+      ansible.builtin.command: lighthouse --version
+      register: lighthouse_version_check
+      changed_when: false
+
+    - name: Скопировать файл конфигурации Lighthouse
+      ansible.builtin.template:
+        src: "{{ lighthouse_config_template }}"
+        dest: "{{ lighthouse_install_dir }}/lighthouse-config.json"
+        mode: "0644"
+
+    - name: Запустить Lighthouse с конфигурацией
+      ansible.builtin.command: lighthouse --config={{ lighthouse_install_dir }}/lighthouse-config.json
+      register: lighthouse_run
+      changed_when: true
