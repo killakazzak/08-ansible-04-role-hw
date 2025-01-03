@@ -59,6 +59,56 @@ roles/vector_role/defaults/main.yml
 vector_role_install_dir: "/opt/vector"
 vector_role_config_template: "vector_config.j2"
 ```
+roles/vector_role/tasks/main.yml
+```yaml
+---
+- name: Установить и настроить Vector
+  block:
+    # - name: Получить последнюю версию Vector
+    # Раскомментируйте следующие строки, чтобы динамически получить последнюю версию
+    # ansible.builtin.uri:
+    #   url: "https://api.github.com/repos/vectordotdev/vector/releases/latest"
+    #   return_content: true
+    # register: vector_release
+
+    # Убедитесь, что вы не оставили пустую строку или не закомментировали всю задачу
+    # Если вы не используете эту задачу, удалите её или закомментируйте
+
+    - name: Установить переменную vector_version
+      ansible.builtin.set_fact:
+        # v_version: "{{ vector_release.json.tag_name | replace('v', '') }}"
+        v_version: "{{ vector_role_version }}"
+
+    - name: Скачать дистрибутив Vector
+      ansible.builtin.get_url:
+        url: "https://github.com/vectordotdev/vector/releases/download/v{{ v_version }}/vector-{{ v_version }}-{{ vector_role_arch }}-unknown-linux-gnu.tar.gz"
+        dest: "/tmp/vector-{{ v_version }}-{{ vector_role_arch }}.tar.gz"
+        mode: "0644"
+
+    - name: Создать директорию для установки Vector
+      ansible.builtin.file:
+        path: "{{ vector_role_install_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Извлечь дистрибутив Vector
+      ansible.builtin.unarchive:
+        src: "/tmp/vector-{{ v_version }}-{{ vector_role_arch }}.tar.gz"
+        dest: "{{ vector_role_install_dir }}"
+        remote_src: true
+
+    - name: Проверить содержимое директории установки Vector
+      ansible.builtin.command: ls -l {{ vector_role_install_dir }}
+      register: vector_dir_contents
+      changed_when: false
+
+    - name: Скопировать файл конфигурации Vector
+      ansible.builtin.template:
+        src: "{{ vector_role_config_template }}"
+        dest: "{{ vector_role_install_dir }}/vector.toml"
+        mode: "0644"
+```
+
 
 5. Перенести нужные шаблоны конфигов в `templates`.
 6. Опишите в `README.md` обе роли и их параметры. Пример качественной документации ansible role [по ссылке](https://github.com/cloudalchemy/ansible-prometheus).
