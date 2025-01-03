@@ -1,4 +1,3 @@
 ---
 lighthouse_install_dir: "/opt/lighthouse"
 lighthouse_config_template: "lighthouse-config.json.j2"
-

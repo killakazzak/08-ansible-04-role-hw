@@ -1,5 +1,5 @@
----
-- hosts: localhost
+- name: Установить и настроить Lighthouse
+  hosts: localhost
   remote_user: root
   roles:
     - lighthouse
