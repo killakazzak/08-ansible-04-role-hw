@@ -1,0 +1,8 @@
+{
+  "extends": "lighthouse:default",
+  "settings": {
+    "output": "html",
+    "outputPath": "{{ lighthouse_install_dir }}/report.html",
+    "onlyCategories": ["performance"]
+  }
+}
