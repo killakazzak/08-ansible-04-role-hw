@@ -18,8 +18,8 @@
 
     - name: Скачать дистрибутив Vector
       ansible.builtin.get_url:
-        url: "https://github.com/vectordotdev/vector/releases/download/v{{ v_version }}/vector-{{ v_version }}-{{ vector_arch }}-unknown-linux-gnu.tar.gz"
-        dest: "/tmp/vector-{{ v_version }}-{{ vector_arch }}.tar.gz"
+        url: "https://github.com/vectordotdev/vector/releases/download/v{{ v_version }}/vector-{{ v_version }}-{{ vector_role_arch }}-unknown-linux-gnu.tar.gz"
+        dest: "/tmp/vector-{{ v_version }}-{{ vector_role_arch }}.tar.gz"
         mode: "0644"
 
     - name: Создать директорию для установки Vector
@@ -30,7 +30,7 @@
 
     - name: Извлечь дистрибутив Vector
       ansible.builtin.unarchive:
-        src: "/tmp/vector-{{ v_version }}-{{ vector_arch }}.tar.gz"
+        src: "/tmp/vector-{{ v_version }}-{{ vector_role_arch }}.tar.gz"
         dest: "{{ vector_role_install_dir }}"
         remote_src: true
 
